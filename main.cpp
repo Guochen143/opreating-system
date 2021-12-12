@@ -4,6 +4,7 @@
     #include <iomanip>
     #include <deque>
     #include <algorithm>
+    #include <vector>
 using namespace std;
 
 class Process
@@ -131,7 +132,7 @@ void RoundRobin (Process *t,const char * quantum)
                 cout<<"< system time "<<cputime<<" > process "<<list.front().Pid<<" is running "<<endl;
             }
 
-            else  if (list.front().remain_t == 0)
+            else  if (list.front().remain_t < 1)
             {
                 cout<<"< system time "<< cputime <<" > process "<< list.front().Pid <<" is finished ....... " <<endl;
                 for(int i=0; i < No_procs;i++)
