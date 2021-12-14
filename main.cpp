@@ -27,25 +27,6 @@ Process *p=new Process[20];
 
 
 
-
-
-void Sort_by_arrivalT(Process *t){
-    int i=0,j=0;
-    Process temp;
-    for(i=0;i<No_procs;i++)
-    {
-     for(j=i;j>=1;j--)
-      { if(p[j].arrival_t<p[j-1].arrival_t)
-          {
-              temp=p[j-1];
-              p[j-1]=p[j];
-              p[j]=temp;
-          }
-      }
-  }
-}
-
-
 int cputime=0;
 void FCFS_Simulator(Process *t){
 
@@ -273,7 +254,7 @@ else
         }
     }
 }
-last = queue.front().Pid;
+last     = queue.front().Pid;
 
 
 if(queue.front().remain_t == 0)
@@ -351,6 +332,12 @@ void Calculate(Process *t)
 }
 
 
+bool arrival_t_comp(const Process& p1, const Process& p2)
+{
+    return p1.arrival_t < p2.arrival_t;
+}
+
+
 
 
 int main(int argc, const char * argv[]) {
@@ -385,8 +372,7 @@ int main(int argc, const char * argv[]) {
       myfile.close();
   }
 
-  Sort_by_arrivalT(p);
-
+  sort(p, p + No_procs, arrival_t_comp);
   cout<<"\n";
   cout<<"===================================================================="<<endl;
 
@@ -403,7 +389,7 @@ else if ((algorithm == "RR" || algorithm == "rr") && argv[3] != NULL)
     RoundRobin(p,argv[3]);
     cout<<"Scheduling Algorithim: RR total "<<No_procs<<" tasks are read from "<<argv[1]<<""<<endl;
 }
-else if (algorithm == "SJF" || algorithm == "sjf")
+else if (algorithm == "SJF" || algorithm == "s  jf")
 {
     SJF_Simulator(p, false);
     cout<<"Scheduling Algorithim: SJF total "<<No_procs<<" tasks are read from "<<argv[1]<<""<<endl;
